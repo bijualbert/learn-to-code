@@ -1,5 +1,7 @@
 package com.navinf.learntocode;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -25,6 +27,8 @@ public class LearnToCode {
 
 	public JFrame frame;
 	public RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+
+	private JLabel status = new JLabel("Ready");
 
 	/**
 	 * Launch the application.
@@ -129,7 +133,10 @@ public class LearnToCode {
 		textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 		textArea.setCodeFoldingEnabled(true);
 		RTextScrollPane sp = new RTextScrollPane(textArea);
-		frame.add(sp);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(sp);
+		panel.add(status, BorderLayout.SOUTH);
+		frame.add(panel);
 		
 		frame.setTitle("Text Editor Demo");
 		frame.pack();
