@@ -51,36 +51,48 @@ public class LearnToCode {
 		textArea.setText("public void main(){\n"+
 				  "\t\n"+
 				  "}");
+		String last_code = null;
+		boolean compiled = false;
 		while(true){
 			final String code = "import java.util.*;\n"+
 								"public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
 								textArea.getText()+
 								"}";
-			@SuppressWarnings("serial")
-			ArrayList<SimpleJavaFileObject> java_files = new ArrayList<SimpleJavaFileObject>(){{
-				add(new JavaSourceFromString("PlayerCodeImpl",code));
-			}};
-			List<String> compileOptions = Arrays.asList(new String[]{"-d", "bin"}) ;
-			CompilationTask task;
-			try {
-				task = jc.getTask(new PrintWriter("errors.log"), null, null, compileOptions, null, java_files);
-			} catch (FileNotFoundException e1) {
-				throw new AssertionError(e1);
+			if(!code.equals(last_code)){
+				last_code=code;
+				@SuppressWarnings("serial")
+				ArrayList<SimpleJavaFileObject> java_files = new ArrayList<SimpleJavaFileObject>() {{
+						add(new JavaSourceFromString("PlayerCodeImpl", code));
+					}
+				};
+				List<String> compileOptions = Arrays.asList(new String[] {
+						"-d", "bin" });
+				CompilationTask task;
+				try {
+					task = jc.getTask(new PrintWriter("errors.log"), null,
+							null, compileOptions, null, java_files);
+				} catch (FileNotFoundException e1) {
+					throw new AssertionError(e1);
+				}
+				if (!task.call()) {
+					System.err.println("[compile failed]");
+					compiled=false;
+				} else{
+					System.out.println("[compile succeeded]");
+					compiled=true;
+				}
 			}
-			if(!task.call()){
-				System.err.println("[compile failed]");
-				continue;
-			}
-			else
-				System.out.println("[compile succeeded]");
-			try {
-				PlayerCode playerCode = (PlayerCode) new ClassReLoader(ClassReLoader.class.getClassLoader()).loadClass("PlayerCodeImpl").newInstance();
-				playerCode.main();
-			} catch (InstantiationException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Thread.sleep(400);
+			if (compiled)
+				try {
+					PlayerCode playerCode = (PlayerCode) new ClassReLoader(
+							ClassReLoader.class.getClassLoader()).loadClass(
+							"PlayerCodeImpl").newInstance();
+					playerCode.main();
+				} catch (InstantiationException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			Thread.sleep(500);
 		}
 	}
 
