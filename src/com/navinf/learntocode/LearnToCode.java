@@ -3,6 +3,7 @@ package com.navinf.learntocode;
 import java.awt.EventQueue;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +30,9 @@ public class LearnToCode {
 	 * Launch the application.
 	 * @throws InterruptedException 
 	 * @throws ClassNotFoundException 
+	 * @throws InvocationTargetException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, InterruptedException {
+	public static void main(String[] args) throws ClassNotFoundException, InterruptedException, InvocationTargetException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,11 +48,13 @@ public class LearnToCode {
 		LearnToCode.instance.compileLoop();
 	}
 	
-	public void compileLoop() throws InterruptedException, ClassNotFoundException{
+	public void compileLoop() throws InterruptedException, ClassNotFoundException, InvocationTargetException{
 		JavaCompiler jc = ToolProvider.getSystemJavaCompiler();
+		SwingUtilities.invokeAndWait(new Runnable(){public void run(){
 		textArea.setText("public void main(){\n"+
 				  "\t\n"+
 				  "}");
+		}});
 		String last_code = null;
 		boolean compiled = false;
 		while(true){
