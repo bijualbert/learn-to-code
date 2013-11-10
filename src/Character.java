@@ -1,18 +1,17 @@
-public abstract class Character extends Element
+
+public abstract class Character extends Mobile
 {
-	private int health, x, y;
+	private int health;
 	
 	public Character()
 	{
+		super( 0, 0, 0, 0, false );
 		setHealth( 100 );
-		setX( 0 );
-		setY( 0 );
 	}
-	public Character( int a, int b, int c )
+	public Character( int a, int b, int c, int d, int health, boolean moving )
 	{
-		setX( a );
-		setY( b );
-		setHealth( c );
+		super( a, b, c, d, moving );
+		setHealth( health );
 	}
 	
 	public void setHealth( int a )
@@ -24,26 +23,6 @@ public abstract class Character extends Element
 	{
 		return health;
 	}
-	
-	public void setY( int a )
-	{
-		y = a;
-	}
-	
-	public int getY()
-	{
-		return y;
-	}
-	
-	public void setX( int a )
-	{
-		x = a;
-	}
-	
-	public int getX()
-	{
-		return x;
-	}
-	
+
 	public abstract void movement();
 }
