@@ -7,6 +7,8 @@ public class Talker extends Character
 	boolean displaying;
 	String str;
 	
+	int code  = 1337;
+	
 	public Talker( int x, int y, int health, String str, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
@@ -37,6 +39,10 @@ public class Talker extends Character
 	public void action(  )
 	{
 		
+	}
+	
+	public boolean unlock(int testCode){
+		return testCode == code;
 	}
 	
 	public void draw(Graphics g){
