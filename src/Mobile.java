@@ -1,6 +1,7 @@
 
 public abstract class Mobile extends Element 
 {
+<<<<<<< HEAD
 	private double vx, vy;
 	private final double GRAVITY = 0.1;
 	
@@ -31,5 +32,10 @@ public abstract class Mobile extends Element
 		if(getVY() < 10){
 			setVY( getVY() + GRAVITY );
 		}
+=======
+	public Mobile( int x, int y, int width, int height, boolean moving )
+	{
+		super( x, y, width, height, moving );
+>>>>>>> 5c233b43ff715007683b63a4dd9f295ad1515cf3
 	}
 }

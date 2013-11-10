@@ -2,7 +2,9 @@ package com.navinf.learntocode;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import org.fife.ui.rtextarea.*;
+import org.fife.ui.rsyntaxtextarea.*;
 
 public class LearnToCode {
 
@@ -38,6 +40,16 @@ public class LearnToCode {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+		textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		textArea.setCodeFoldingEnabled(true);
+		RTextScrollPane sp = new RTextScrollPane(textArea);
+		frame.add(sp);
+		
+		frame.setTitle("Text Editor Demo");
+		frame.pack();
+		frame.setLocationRelativeTo(null);
 	}
 
 }
