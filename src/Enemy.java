@@ -9,23 +9,25 @@ public class Enemy extends Character
 	public enum Facing { LEFT, RIGHT }
 	Facing face = Facing.LEFT;
 	Random random = new Random();
+	Player player;
 	
 	public Enemy( int x, int y, int health, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
+		
+		for( int i = 0; i < elements.size() - 1; i++ )
+		{
+			if( elements.get( i ) instanceof Player )
+				player = (Player) elements.get( i );
+		}
 	}
 	
 	public void movement()
 	{
-
-	
-		/*while()
-=======
 		int choice = random.nextInt( 3 ) + 1;
 		something( player );
 		
 		switch( choice )
->>>>>>> a3fda7705383422f5dcdf2e3d9d587ab4f747e9e
 		{
 		case 1:
 			if( face == Facing.LEFT )
@@ -61,21 +63,15 @@ public class Enemy extends Character
 			break;
 		 		
 		case RIGHT:
-		 {
+		{
 		 	if( player.getX() > getX() && player.getX() - getX() <= 200 )
 				shoot();
 		}
 			break;
 				
-<<<<<<< HEAD
-			default:
-				break;
-			}
-		}
-=======
 		default:
 			break;
-		}*/
+		}
 	}
 
 	private void shoot()

@@ -53,11 +53,20 @@ public class LearnToCode {
 			}};
 			List<String> compileOptions = Arrays.asList(new String[]{"-d", "bin"}) ;
 			CompilationTask task = jc.getTask(null, null, null, compileOptions, null, java_files);
-			if(!task.call())
-				System.err.println("compile failed");
+			if(!task.call()){
+				System.err.println("[compile failed]");
+				continue;
+			}
 			else
-				System.out.println("compile succeeded");
-			Thread.sleep(300);
+				System.out.println("[compile succeeded]");
+			try {
+				PlayerCode playerCode = (PlayerCode) new ClassReLoader(ClassReLoader.class.getClassLoader()).loadClass("PlayerCodeImpl").newInstance();
+				playerCode.main();
+			} catch (InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Thread.sleep(200);
 		}
 	}
 
