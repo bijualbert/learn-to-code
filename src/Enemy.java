@@ -26,6 +26,7 @@ public class Enemy extends Character
 	{
 		int choice = random.nextInt( 3 ) + 1;
 		something( player );
+		setVX( 25 );
 		
 		switch( choice )
 		{
@@ -44,6 +45,7 @@ public class Enemy extends Character
 			break;
 			
 		case 3:
+			setVX( 0 );
 			break;
 			
 		default:
@@ -76,9 +78,5 @@ public class Enemy extends Character
 
 	private void shoot()
 	{}
-	
-	public void update(){
-		
-	}
 	
 }
