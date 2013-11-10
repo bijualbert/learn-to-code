@@ -83,12 +83,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		reflect = new AffineTransformOp(tr, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		
 		//elements.add(e1 = new Ball(10, 10, 32, 32));
-		player = new Player(20, 20, 100, elements);
+		player = new Player(-300, 20, 100, elements);
 		elements.add(player);
 		
 		
 		
-		elements.add(new Obstacle(0, 300, 5000, 30, elements));
+		elements.add(new Obstacle(-1000, 300, 6000, 30, elements));
 		
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
 		
@@ -124,8 +124,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		computer = talker2;
 		
 		//Dummy talkers
-		elements.add(new Talker(1350, 150, 50, "You can talk to the ", elements));
-		
+		elements.add(new Talker(1350, 150, 50, "Talk to voice-activated computers using \"System.out.println.\"", elements));
+
 		setFocusable(true);
 		addKeyListener(this);
 		
@@ -185,9 +185,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		g.translate(-player.getX() + getWidth()/2 -200, 0);
 		
-		for (int i = 0; i <= 2; i += 2) {
-			g.drawImage(background, null, -250 + i * background.getWidth(), 0);
-			g.drawImage(background, reflect, -250 + (i + 1) * background.getWidth(), 0);
+		for (int i = 0; i <= 2; i += 8) {
+			g.drawImage(background, null, -1000 + i * background.getWidth(), 0);
+			g.drawImage(background, reflect, -1000 + (i + 1) * background.getWidth(), 0);
 		}
 		
 		Iterator<? extends Element> iterator = elements.iterator();
@@ -244,6 +244,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    		parentWindow.pack();
 	    		parentWindow.setSize(800 , 600);
 	    		codeBox.requestFocusInWindow();
+	    		elements.add(new Talker(-50, 150, 50, "Fill in the quotes: System.out.println(\" \");", elements));
+
 	    	}
 	    	
 	    	
