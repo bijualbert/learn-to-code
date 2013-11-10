@@ -1,8 +1,8 @@
 
 public abstract class Mobile extends Element 
 {
-	public Mobile( int a, int b, int c, int d, boolean bool )
+	public Mobile( int x, int y, int width, int height, boolean moving )
 	{
-		super( a, b, c, d, bool );
+		super( x, y, width, height, moving );
 	}
 }

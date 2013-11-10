@@ -8,9 +8,9 @@ public abstract class Character extends Mobile
 		super( 0, 0, 0, 0, false );
 		setHealth( 100 );
 	}
-	public Character( int a, int b, int c, int d, int health, boolean moving )
+	public Character( int x, int y, int width, int height, int health, boolean moving )
 	{
-		super( a, b, c, d, moving );
+		super( x, y, width, height, moving );
 		setHealth( health );
 	}
 	
