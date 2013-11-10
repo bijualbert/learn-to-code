@@ -15,6 +15,16 @@ public abstract class Element{
 		this.elements = elements;
 	}
 	
+	public double distanceTo(Element e){
+		int centerx1 = this.getX() + getWidth()/2;
+		int centery1 = this.getY() + getHeight()/2;
+		
+		int centerx2 = e.getX() + e.getWidth()/2;
+		int centery2 = e.getY() + e.getHeight()/2;
+		
+		return Math.sqrt( (centerx2 - centerx1) * (centerx2 - centerx1) + (centery2 - centery1)*(centery2 - centery1) );
+	}
+	
 	public boolean[] isColliding(Element e){
 	    int leftSide = getX();
 	    int rightSide = getX() + getWidth();
