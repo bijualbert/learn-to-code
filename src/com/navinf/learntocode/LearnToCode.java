@@ -79,12 +79,12 @@ public class LearnToCode {
 				};
 				List<String> compileOptions = Arrays.asList(new String[] {
 						"-d", "bin" });
-				CompilationTask task;
+				CompilationTask task = null;
 				try {
 					task = jc.getTask(new PrintWriter("errors.log"), null,
 							null, compileOptions, null, java_files);
 				} catch (FileNotFoundException e1) {
-					throw new AssertionError(e1);
+					System.out.println(e1);
 				}
 				if (!task.call()) {
 					System.err.println("[compile failed]");
