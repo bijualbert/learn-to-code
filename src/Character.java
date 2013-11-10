@@ -1,18 +1,20 @@
-public abstract class Character extends Element
+import java.awt.*;
+
+public abstract class Character extends Mobile
 {
 	private int health, x, y;
 	
 	public Character()
 	{
+		super(0,0,1,1);
 		setHealth( 100 );
 		setX( 0 );
 		setY( 0 );
 	}
-	public Character( int a, int b, int c )
+	public Character( int x, int y, int health )
 	{
-		setX( a );
-		setY( b );
-		setHealth( c );
+		super(x,y,32,32);
+		setHealth( health );
 	}
 	
 	public void setHealth( int a )
@@ -25,25 +27,11 @@ public abstract class Character extends Element
 		return health;
 	}
 	
-	public void setY( int a )
-	{
-		y = a;
-	}
-	
-	public int getY()
-	{
-		return y;
-	}
-	
-	public void setX( int a )
-	{
-		x = a;
-	}
-	
-	public int getX()
-	{
-		return x;
-	}
 	
 	public abstract void movement();
+	
+	public void draw(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
 }

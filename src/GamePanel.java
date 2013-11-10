@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public GamePanel() {
 		//elements.add(e1 = new Ball(10, 10, 32, 32));
-		//elements.add(new Rectangle(20, 20, 32, 32));
+		elements.add(new Player(20, 20, 100));
 		
 		new Thread(this).start();
 	}
