@@ -64,7 +64,7 @@ public class LearnToCode {
 		boolean ran = false;
 		while(true){
 			final String code = "import java.util.*;\n"+
-								"import static GamePanel.*;\n"+
+								"import static com.navinf.learntocode.GamePanel.*;\n"+
 								"public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
 								"public Mobile player = (Mobile)GamePanel.me.player;\n"+
 								textArea.getText()+
