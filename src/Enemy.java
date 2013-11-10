@@ -10,6 +10,9 @@ public abstract class Enemy extends Character
 	Facing face = Facing.LEFT;
 	Random random = new Random();
 	Player player;
+	public int minX;
+	public int maxX;
+	public boolean restrict;
 	
 	public Enemy( int x, int y, int health, ArrayList<Element> elements )
 	{
@@ -20,46 +23,50 @@ public abstract class Enemy extends Character
 			if( elements.get( i ) instanceof Player )
 				player = (Player) elements.get( i );
 		}
+		
+		if(random.nextInt() == 1){
+			face = Facing.RIGHT;
+		}
 	}
 	
 	public void update(){
 		super.update();
-		if(ticker % 60 == 0){
+		if(restrict && (getX() < minX)){
+			face = Facing.RIGHT;
+			setX(minX);
+		}
+		if(restrict && (getX() > maxX)){
+			face = Facing.LEFT;
+			setX(maxX);
+		}
+		if(ticker % 100 == 1){
 			movement();
 		}
+		
 	}
 	
 	public void movement()
 	{
-		int choice = random.nextInt( 3 ) + 1;
-		something( player );
-		setVX( 25 );
 		
-		switch( choice )
-		{
-		case 1:
-			if( face == Facing.LEFT ){
-				moveLeft( true );
-				moveRight( false );
-			}else{
-				moveRight( true );
-				moveLeft( false );}
-			break;
-			
-		case 2:
-			if( face == Facing.LEFT )
-				face = Facing.RIGHT;
-			else
-				face = Facing.LEFT;
-			break;
-			
-		case 3:
-			setVX( 0 );
-			break;
-			
-		default:
-			break;
-		}
+		something( player );
+		//setVX( 0.05 );
+		
+		if( face == Facing.LEFT ){
+			moveLeft( true );
+			moveRight( false );
+		}else{
+			moveRight( true );
+			moveLeft( false );}
+		
+		
+	}
+	
+	public void changeDirection(){
+		System.out.println("sdfsd");
+		if( face == Facing.LEFT )
+			face = Facing.RIGHT;
+		else
+			face = Facing.LEFT;
 	}
 	
 	private void something( Player player )

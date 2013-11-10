@@ -8,7 +8,7 @@ public abstract class Mobile extends Element
 	private final double GRAVITY = 0.3;
 	public boolean grounded;
 	protected final double MAXVX = 5;
-	protected final double MOVESPEED = 0.2;
+	protected double MOVESPEED = 0.05;
 	protected final double JUMPSPEED = 10;
 	public boolean movingRight;
 	public boolean movingLeft;
@@ -168,43 +168,12 @@ public abstract class Mobile extends Element
 					}
 					if(array2[3]){
 						//System.out.println("THREE");
-							setVX(-getVX()*0.5);
 							setVX(0);
 					}
 					if(array2[4]){
-						System.out.println("FOUR");
-						System.out.println("yup");
 						grounded = true;
 						setVY(0);
 					}
-					
-				
-				
-				/*switch (this.isColliding(elements.get(j))) {
-					
-					case 0: 
-						//System.out.println("S'all good");
-						break;
-					
-					case 2:
-						setY(getY() - (getVY() > 0 ? -1 : 1));
-						setVY(0);
-						break;
-					case 1:
-						setX(getX() + (getVX()) > 0 ? -1 : 1);
-						setVX(-getVX()*0.5);
-						break;
-					case 3:
-						setX(getX() + (getVX()) > 0 ? -1 : 1);
-						setVX(-getVX()*0.5);
-						break;
-					case 4:
-						grounded = true;
-						setY(getY() - (getVY() > 0 ? -1 : 1));
-						setVY(0);
-						break;
-				
-				}*/
 				
 				
 			}

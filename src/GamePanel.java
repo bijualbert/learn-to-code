@@ -87,7 +87,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(new Obstacle(400, 150, 50, 150, elements));
 		
-		elements.add(new Shooter(1000, 200, 50, elements));
+		elements.add(new Obstacle(1500, 150, 50, 150, elements));
+		
+		Shooter shooter = new Shooter(700, 200, 50, elements);
+		shooter.minX = 500;
+		shooter.maxX =  1000;
+		shooter.restrict = true;
+		
+		elements.add(shooter);
 
 		
 		setFocusable(true);
