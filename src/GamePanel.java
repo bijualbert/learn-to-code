@@ -106,8 +106,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		super.paint(f);
 		Graphics2D g = (Graphics2D)f;
 		g.setColor(Color.WHITE);
-		g.translate(player.getX(), 0);
+		
 		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.translate(-player.getX() + getWidth()/2 -200, 0);
 		
 		Iterator<? extends Element> iterator = elements.iterator();
 		
