@@ -12,7 +12,7 @@ public class Talker extends Character
 	
 	int code  = 1337;
 	
-	int attached;
+	Obstacle attached;
 	
 	public Talker( int x, int y, int health, String str, ArrayList<Element> elements )
 	{
@@ -27,7 +27,7 @@ public class Talker extends Character
     			index = i;
     		}
     	}
-		attached = index;
+		attached = o;
 	}
 	
 	public void update(){

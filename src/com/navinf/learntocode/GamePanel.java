@@ -70,12 +70,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public ArrayList<Element> elements = new ArrayList<Element>();
 	
 	private BufferedImage background;
+	private BufferedImage trophy;
+	private BufferedImage comp;
 	AffineTransformOp reflect;
     
 	//private Ball e1;
 
 	public GamePanel() throws IOException {
 		background=ImageIO.read(new File("background.jpg"));
+		trophy=ImageIO.read(new File("trophy.png"));
+		comp=ImageIO.read(new File("comp.jpg"));
 //		AffineTransform scale = new AffineTransform();
 //		scale.scale(0.4, 0.4);
 //		//scale.
@@ -98,23 +102,35 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		//elements.add(new Obstacle(1500, 150, 50, 150, elements));
 		
-		Obstacle door1 = new Obstacle(400, 100, 50, 200, elements);
+		Obstacle door1 = new Obstacle(400, 0, 50, 300, elements);
 		
 		elements.add(door1);
 		
-		Shooter shooter = new Shooter(700, 200, 50, elements);
+		Shooter shooter = new Shooter(600, 200, 50, elements);
 		shooter.minX = 500;
 		shooter.maxX =  1000;
 		shooter.restrict = true;
 		
+		Shooter shooter2 = new Shooter(700, 200, 50, elements);
+		shooter2.minX = 500;
+		shooter2.maxX =  1000;
+		shooter2.restrict = true;
+		
+		Shooter shooter3 = new Shooter(900, 200, 50, elements);
+		shooter3.minX = 500;
+		shooter3.maxX =  1000;
+		shooter3.restrict = true;
+		
 		elements.add(shooter);
+		elements.add(shooter2);
+		elements.add(shooter3);
 		
 		Talker talker = new Talker(200, 150, 50, "I am a voice-activated computer -- Identify yourself.", elements);
 		
 		elements.add(talker);
 		
 		
-		Obstacle door2 = new Obstacle(1500, 100, 50, 200, elements);
+		Obstacle door2 = new Obstacle(1500, 0, 50, 300, elements);
 		
 		elements.add(door2);
 		
@@ -130,7 +146,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		elements.add(new Obstacle(2450, 0, 50, 300, elements));
 		
 		//Dummy talkers
-		//elements.add(new Talker(1350, 150, 50, "Talk to voice-activated computers using \"System.out.println.\"", elements));
+		elements.add(new Talker(2055, 200, 50, "How can you get into the box using code?", elements));
+		elements.add(new Talker(1800, 150, 50, "My current coordinates are: 1800, 250", elements));
 
 		setFocusable(true);
 		addKeyListener(this);
@@ -208,6 +225,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.drawString(""+player.getX(), 100, 120);
 		g.drawString(""+player.getY(), 100, 130);
 		
+		g.drawImage(trophy, 2200, 100, 100, 100, null);
+		
 		player.draw(g);
 		g.translate(player.getX() - getWidth()/2 + 200, 0);
 		
@@ -249,8 +268,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    		codeBox.setVisible(true);
 	    		parentWindow.pack();
 	    		parentWindow.setSize(800 , 600);
-	    		//codeBox.requestFocusInWindow();
-	    		elements.add(new Talker(-50, 150, 50, "Fill in the quotes: System.out.println(\" \");", elements));
+	    		me.requestFocusInWindow();
+	    		elements.add(new Talker(-20, 150, 50, "Fill in the quotes: System.out.println(\" \");", elements));
 
 	    	}
 	    	

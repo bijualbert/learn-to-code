@@ -11,7 +11,7 @@ public class Shooter extends Enemy
 	
 	public void update(){
 		super.update();
-		if(distanceTo(player) < 50 && ticker % 30 == 0){
+		if(distanceTo(player) < 50 && ticker % 10 == 0){
 			player.damage(10);
 		}
 	}
