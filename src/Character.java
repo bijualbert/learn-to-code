@@ -6,12 +6,18 @@ import java.util.ArrayList;
 public abstract class Character extends Mobile
 {
 	private int health;
-	
+	Player player;
 	
 	public Character( int x, int y, int health, ArrayList<Element> elements )
 	{
 		super(x,y,32,32, elements);
 		setHealth(health);
+		
+		for( int i = 0; i < elements.size() - 1; i++ )
+		{
+			if( elements.get( i ) instanceof Player )
+				player = (Player) elements.get( i );
+		}
 	}
 	
 	
