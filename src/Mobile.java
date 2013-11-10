@@ -30,12 +30,12 @@ public abstract class Mobile extends Element
 	
 	public void moveRight()
 	{
-		
+		setX( getX() + getVX() );
 	}
 	
 	public void moveLeft()
 	{
-		
+		setX( getX() - getVX() );
 	}
 	
 	public void update(){
