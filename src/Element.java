@@ -15,7 +15,7 @@ public abstract class Element{
 		this.elements = elements;
 	}
 	
-	public int isColliding(Element e){
+	public boolean[] isColliding(Element e){
 	    int leftSide = getX();
 	    int rightSide = getX() + getWidth();
 	    int top = getY();
@@ -26,30 +26,44 @@ public abstract class Element{
 	    int eTop = e.getY();
 	    int eBottom = e.getY() + e.getHeight();
 	    
-	    int count = 0;
+	    boolean[] array = {false, false, false, false, false};
 	    
-	    if(eTop < bottom && eLeftSide < rightSide && eRightSide > leftSide && eBottom > top){
-	    	System.out.println("bottom");
-	    	return 4;
-	    }
-	    
-	    if(eBottom > top && eLeftSide < rightSide && eRightSide > leftSide && eTop < bottom){
-	    	System.out.println("top");
-	    	return 2;
-	    }
-	    
-	    if(eBottom > top && eTop < bottom && eRightSide < leftSide && eLeftSide > rightSide){
-	    	System.out.println("left");
-	    	return 3;
+	    if(eBottom > top && eTop < bottom && eRightSide > leftSide && eLeftSide < rightSide){
+	    	//System.out.println("left");
+	    	array[3] = true;
+	    	//return 3;
 	    }
 	    
 	    if(eBottom > top && eTop < bottom && eLeftSide < rightSide && eRightSide > leftSide ){
-	    	System.out.println("right");
-	    	return 1;
+	    	//System.out.println("right");
+	    	array[1] = true;
+	    	//return 1;
 	    }
-	    	
 	    
-	    return 0;
+	    if(eTop < bottom && eLeftSide < rightSide && eRightSide > leftSide && eBottom > top){
+	    	//System.out.println("bottom");
+	    	array[4] = true;
+	    	//return 4;
+	    }
+	    
+	    if(eBottom > top && eLeftSide < rightSide && eRightSide > leftSide && eTop < bottom){
+	    	//System.out.println("top");
+	    	array[2] = true;
+	    	//return 2;
+	    }
+	    
+	    int count = 0;
+	    for(boolean b : array){
+	    	if(b){
+	    		count++;
+	    	}
+	    }
+	    
+	    if(count == 0){
+	    	array[0] = true;
+	    }
+	    
+	    return array;
 	}
 
 	public void setX(double x) {

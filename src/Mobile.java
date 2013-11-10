@@ -6,10 +6,10 @@ public abstract class Mobile extends Element
 
 	private double vx, vy;
 	private final double GRAVITY = 0.3;
-	protected boolean grounded;
+	public boolean grounded;
 	protected final double MAXVX = 5;
 	protected final double MOVESPEED = 0.2;
-	protected final double JUMPSPEED = 5;
+	protected final double JUMPSPEED = 10;
 	public boolean movingRight;
 	public boolean movingLeft;
 	
@@ -80,15 +80,107 @@ public abstract class Mobile extends Element
 		}
 		
 		
-		
+		if(getVY() < 10 && !grounded ){
+			setVY( getVY() + GRAVITY );
+		}
 		
 		
 		for(int j = 0; j < elements.size(); j++){
+			
 			if ((elements.get(j) != this)){
-				switch (this.isColliding(elements.get(j))) {
+				
+				
+				
+				
+				boolean[] array2 = {false, false, false, false, false};
+				
+				//setY( getY() + 5 );
+				
+				boolean[] array = this.isColliding(elements.get(j));
+				
+				//if(array[0]){
+				//	System.out.println("unground");
+				//	grounded = false;
+				//}
+				
+				//setY( getY() - 5 );
+				
+				array = this.isColliding(elements.get(j));
+				
+				while(array[1] || array[2] || array[3] || array[4]){
+					//System.out.println("bleh");
+					array = this.isColliding(elements.get(j));
+					if(array[1]){
+						//System.out.println("1");
+						setX(getX() - 1 );
+						array2[1] = true;
+					}
+					
+					if(array[2]){
+						//System.out.println("2");
+						setY(getY() + 1 );
+						array2[2] = true;
+					}
+					
+					if(array[3]){
+						//System.out.println("3");
+						setX(getX() + 1);
+						array2[3] = true;
+					}
+					
+					if(array[4]){
+						//System.out.println("4");
+						setY(getY() - 1);
+						array2[4] = true;
+					}
+					
+					if(array[4] && array[2]){
+						setY(getY() - 1);
+					}
+					
+					if(array[1] && array[3]){
+						
+						if(getVX() > 0){
+							setX(getX() - 1);
+						}else if(getVX() < 0){
+							setX(getX() + 1);
+						}else{
+							
+						}
+					}
+					
+					
+				}
+				
+				
+				
+					if(array2[1]){
+						//System.out.println("ONE");
+						setVX(-getVX()*0.5);
+						setVX(0);
+					}
+					if(array2[2]){
+						//System.out.println("TWO");
+						setVY(0);
+					}
+					if(array2[3]){
+						//System.out.println("THREE");
+							setVX(-getVX()*0.5);
+							setVX(0);
+					}
+					if(array2[4]){
+						System.out.println("FOUR");
+						System.out.println("yup");
+						grounded = true;
+						setVY(0);
+					}
+					
+				
+				
+				/*switch (this.isColliding(elements.get(j))) {
 					
 					case 0: 
-						System.out.println("S'all good");
+						//System.out.println("S'all good");
 						break;
 					
 					case 2:
@@ -109,28 +201,29 @@ public abstract class Mobile extends Element
 						setVY(0);
 						break;
 				
-				}
+				}*/
 				
 				
 			}
 		}
 		
-		setY( getY() + 1 );
-		
-		/*for(int j = 0; j < elements.size(); j++){
-			if (elements.get(j) != this && this.isColliding(elements.get(j)) != 0){
+		setY( getY() + 3 );
+		int any = 0;
+		for(int j = 0; j < elements.size(); j++){
+			if (elements.get(j) != this && !this.isColliding(elements.get(j))[0]){
 				
-				grounded = true;
-			}else{
-				grounded = false;
+				any++;
 			}
-		}*/
-		
-		setY( getY() - 1 );
-		
-		if(getVY() < 10 && !grounded ){
-			setVY( getVY() + GRAVITY );
 		}
+		if(any > 0){
+			grounded = true;
+		}else{
+			grounded = false;
+		}
+		
+		setY( getY() - 3 );
+		
+		
 		
 		setX( getX() + (int)getVX() );
 		setY( getY() + (int)getVY() );

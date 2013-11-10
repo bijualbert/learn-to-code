@@ -5,6 +5,7 @@ import javax.swing.*;
  
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private static final int FPS = 1000 / 36;
+	private int ticks;
 	
 	Player player;
 	
@@ -34,6 +35,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		elements.add(new Obstacle(0, 300, 500, 30, elements));
 		
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
+		
+		elements.add(new Obstacle(400, 150, 50, 150, elements));
 
 		
 		setFocusable(true);
@@ -49,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         while(true){
             update();
             repaint();
+            ticks++;
 
             try {
                 tm += FPS;
@@ -80,9 +84,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			((Element) iterator.next()).draw(g);
 		
 		g.setColor(Color.red);
-		g.drawString(""+player.movingLeft, 100, 100);
+		g.drawString(""+player.grounded, 100, 100);
 
-		g.drawString(""+player.movingRight, 100, 110);
+		g.drawString(""+ticks, 100, 110);
 		g.drawString(""+player.getX(), 100, 120);
 		g.drawString(""+player.getY(), 100, 130);
 	}
