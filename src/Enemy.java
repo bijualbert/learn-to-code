@@ -1,9 +1,9 @@
 
 public class Enemy extends Character
 {
-	public Enemy( int x, int y, int health )
+	public Enemy( int health )
 	{
-		super( x, y, health );
+		super( health );
 	}
 	
 	public void movement()

@@ -1,9 +1,9 @@
 
 public class Player extends Character
 {
-	public Player( int x, int y, int health )
+	public Player( int health )
 	{
-		super( x, y, health );
+		super( health );
 	}
 	
 	public void movement()
