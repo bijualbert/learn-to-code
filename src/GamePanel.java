@@ -1,8 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.navinf.learntocode.LearnToCode;
@@ -15,9 +22,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	public static GamePanel me;
 	
-	Player player;
+	public Player player;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
     {
     	
 		JFrame parentWindow = new JFrame("Learn Programming v1");
@@ -52,10 +59,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 	
 	public ArrayList<Element> elements = new ArrayList<Element>();
+	
+	private BufferedImage background;
+	AffineTransformOp reflect;
     
 	//private Ball e1;
 
-	public GamePanel() {
+	public GamePanel() throws IOException {
+		background=ImageIO.read(new File("background.jpg"));
+		AffineTransform scale = new AffineTransform();
+		scale.scale(0.4, 0.4);
+		//scale.
+		
+		AffineTransform tr = AffineTransform.getScaleInstance(-1, 1);
+		tr.translate(-background.getWidth(null), 0);
+		reflect = new AffineTransformOp(tr, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+		
 		//elements.add(e1 = new Ball(10, 10, 32, 32));
 		player = new Player(20, 20, 100, elements);
 		elements.add(player);
@@ -122,6 +141,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g.translate(-player.getX() + getWidth()/2 -200, 0);
+		
+		for (int i = 0; i <= 2; i += 2) {
+			g.drawImage(background, null, -250 + i * background.getWidth(), 0);
+			g.drawImage(background, reflect, -250 + (i + 1) * background.getWidth(), 0);
+		}
 		
 		Iterator<? extends Element> iterator = elements.iterator();
 		
