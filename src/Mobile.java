@@ -88,7 +88,7 @@ public abstract class Mobile extends Element
 				switch (this.isColliding(elements.get(j))) {
 					
 					case 0: 
-						System.out.println("S'all good");
+						//System.out.println("S'all good");
 						break;
 					
 					case 2:

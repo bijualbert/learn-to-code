@@ -1,10 +1,16 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+
 import javax.swing.*;
+
+import com.navinf.learntocode.LearnToCode;
+
  
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private static final int FPS = 1000 / 36;
+	public static GamePanel me;
 	
 	Player player;
 	
@@ -12,17 +18,36 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     {
     	JFrame parentWindow = new JFrame("Learn Programming v0");
     	
-    	GamePanel me = new GamePanel();
+    	me = new GamePanel();
+    	me.addMouseListener(new MouseAdapter() {
+    		@Override public void mousePressed(MouseEvent e){
+    			me.requestFocusInWindow();
+    		}
+		});
     	
     	parentWindow.getContentPane().add(me);
     	//parentWindow.getContentPane().addKeyListener(me);
     	
     	parentWindow.setSize(800 , 600);
         parentWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        final LearnToCode ltc = new LearnToCode();
+        Component codeBox = ltc.frame.getComponent(0);
+        codeBox.setPreferredSize(new Dimension(800, 150));
+        parentWindow.add(codeBox,BorderLayout.SOUTH);
+        new Thread(){public void run(){
+        	try {
+				ltc.compileLoop();
+			} catch (ClassNotFoundException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }}.start();
+        
         parentWindow.setVisible(true);
     }
 	
-	private ArrayList<Element> elements = new ArrayList<Element>();
+	public ArrayList<Element> elements = new ArrayList<Element>();
     
 	//private Ball e1;
 
