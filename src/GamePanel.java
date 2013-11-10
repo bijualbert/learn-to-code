@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         new Thread(){public void run(){
         	try {
 				ltc.compileLoop();
-			} catch (ClassNotFoundException | InterruptedException | InvocationTargetException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
