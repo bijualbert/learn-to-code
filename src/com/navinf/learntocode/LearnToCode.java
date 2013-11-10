@@ -22,7 +22,7 @@ public class LearnToCode {
 	private static volatile LearnToCode instance;
 
 	public JFrame frame;
-	private RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+	public RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
 
 	/**
 	 * Launch the application.
