@@ -9,7 +9,6 @@ public abstract class Enemy extends Character
 	public enum Facing { LEFT, RIGHT }
 	Facing face = Facing.LEFT;
 	Random random = new Random();
-	Player player;
 	public int minX;
 	public int maxX;
 	public boolean restrict;
@@ -18,11 +17,7 @@ public abstract class Enemy extends Character
 	{
 		super( x, y, health, elements );
 		
-		for( int i = 0; i < elements.size() - 1; i++ )
-		{
-			if( elements.get( i ) instanceof Player )
-				player = (Player) elements.get( i );
-		}
+		
 		
 		if(random.nextInt() == 1){
 			face = Facing.RIGHT;

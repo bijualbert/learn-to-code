@@ -76,6 +76,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		shooter.restrict = true;
 		
 		elements.add(shooter);
+		
+		elements.add(new Talker(200, 150, 50, elements));
 
 		
 		setFocusable(true);
@@ -132,7 +134,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.drawString(""+ticks, 100, 110);
 		g.drawString(""+player.getX(), 100, 120);
 		g.drawString(""+player.getY(), 100, 130);
+		
+		player.draw(g);
 		g.translate(-player.getX(), 0);
+		
+		
 		
 	}
 	
