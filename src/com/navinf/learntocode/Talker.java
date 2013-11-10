@@ -24,7 +24,7 @@ public class Talker extends Character
 	{
 		super( x, y, health, elements );
 		try {
-			image=ImageIO.read(new File("comp.jpg"));
+			image=ImageIO.read(new File("comp.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
