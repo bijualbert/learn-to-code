@@ -1,9 +1,8 @@
 import java.awt.*;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
+
 import java.util.*;
->>>>>>> a3fda7705383422f5dcdf2e3d9d587ab4f747e9e
 
 public class Enemy extends Character
 {
@@ -18,7 +17,7 @@ public class Enemy extends Character
 	
 	public void movement()
 	{
-<<<<<<< HEAD
+
 	
 		/*while()
 =======
@@ -72,12 +71,11 @@ public class Enemy extends Character
 			default:
 				break;
 			}
-		}*/
+		}
 =======
 		default:
 			break;
-		}
->>>>>>> a3fda7705383422f5dcdf2e3d9d587ab4f747e9e
+		}*/
 	}
 
 	private void shoot()
@@ -87,5 +85,4 @@ public class Enemy extends Character
 		
 	}
 	
-	public void movement(){}
 }
