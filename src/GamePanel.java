@@ -25,11 +25,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public Player player;
 	
 	public static PrintLogger pl;
+	public static Component codeBox;
+	public static JFrame parentWindow;
 	
 	public static void main(String[] args) throws IOException
     {
     	System.setOut(pl=new PrintLogger(System.out));
-		JFrame parentWindow = new JFrame("Learn Programming v1");
+		parentWindow = new JFrame("Learn Programming v1");
     	
     	me = new GamePanel();
     	me.addMouseListener(new MouseAdapter() {
@@ -44,10 +46,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	parentWindow.setSize(800 , 600);
         parentWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        me.setPreferredSize(new Dimension(800, 450));
+        
         final LearnToCode ltc = new LearnToCode();
-        Component codeBox = ltc.frame.getComponent(0);
+        codeBox = ltc.frame.getComponent(0);
         codeBox.setPreferredSize(new Dimension(800, 150));
         parentWindow.add(codeBox,BorderLayout.SOUTH);
+        codeBox.setVisible(false);
         new Thread(){public void run(){
         	try {
 				ltc.compileLoop();
@@ -87,9 +92,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
 		
-		elements.add(new Obstacle(400, 150, 50, 150, elements));
+		
 		
 		elements.add(new Obstacle(1500, 150, 50, 150, elements));
+		
+		Obstacle door1 = new Obstacle(400, 150, 50, 150, elements);
+		
+		elements.add(door1);
 		
 		Shooter shooter = new Shooter(700, 200, 50, elements);
 		shooter.minX = 500;
@@ -98,7 +107,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(shooter);
 		
-		elements.add(new Talker(200, 150, 50, elements));
+		Talker talker = new Talker(200, 150, 50, elements);
+		
+		elements.add(talker);
 
 		
 		setFocusable(true);
@@ -140,7 +151,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		Graphics2D g = (Graphics2D)f;
 		g.setColor(Color.WHITE);
 		
+		
+		
 		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		
 		
 		g.translate(-player.getX() + getWidth()/2 -200, 0);
 		
@@ -162,7 +177,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.drawString(""+player.getY(), 100, 130);
 		
 		player.draw(g);
-		g.translate(-player.getX(), 0);
+		g.translate(player.getX() - getWidth()/2 + 200, 0);
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(30, 30, 100, 15);
+		
+		g.setColor(Color.RED);
+		g.fillRect(30, 30, player.getHealth(), 15);
+		
 		
 		
 		
@@ -183,6 +205,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    if (key == KeyEvent.VK_UP) {
 	        player.jump();
 	    }
+	    
+	    if (key == KeyEvent.VK_SPACE) {
+	    	Talker talker = new Talker(0, 0, 0, elements);
+	    	for(Element el: elements){
+	    		if(el instanceof Talker){
+	    			talker = (Talker)el;
+	    		}
+	    	}
+	    	if(player.distanceTo(talker) < 100){
+	    		codeBox.setVisible(true);
+	    		parentWindow.pack();
+	    		parentWindow.setSize(800 , 600);
+	    		codeBox.requestFocusInWindow();
+	    	}
+	    	
+	    }
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -196,6 +234,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    if (key == KeyEvent.VK_RIGHT) {
 	        player.moveRight(false);
 	    }
+	    
+	    
 	}
 	
 	public void keyTyped(KeyEvent e) {
