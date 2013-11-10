@@ -3,6 +3,7 @@ import java.awt.*;
 public class Enemy extends Character
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public enum Facing { LEFT, RIGHT }
 	Facing face = Facing.LEFT;
 	
@@ -41,6 +42,8 @@ public class Enemy extends Character
 	
 	public void patrol(  )
 =======
+=======
+>>>>>>> d7e0c2ccda138a138df343dea884e40c613c6f69
 	
 	public Enemy(int x, int y, int health){
 		super( x, y, health );
@@ -54,10 +57,13 @@ public class Enemy extends Character
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public void shoot()
 	{}
 	
 =======
+=======
+>>>>>>> d7e0c2ccda138a138df343dea884e40c613c6f69
 	public void draw(Graphics g){
 		
 	}
@@ -65,5 +71,8 @@ public class Enemy extends Character
 	public void update(){
 		
 	}
+<<<<<<< HEAD
+>>>>>>> d7e0c2ccda138a138df343dea884e40c613c6f69
+=======
 >>>>>>> d7e0c2ccda138a138df343dea884e40c613c6f69
 }
