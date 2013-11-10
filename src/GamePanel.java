@@ -32,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		elements.add(player);
 		
 		elements.add(new Obstacle(0, 300, 500, 30, elements));
+		
+		elements.add(new Obstacle(200, 250, 50, 50, elements));
 
 		
 		setFocusable(true);
@@ -90,7 +92,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    int key = e.getKeyCode();
 
 	    if (key == KeyEvent.VK_LEFT) {
-	    	System.out.println("YAYS");
 	       player.moveLeft(true);
 	    }
 

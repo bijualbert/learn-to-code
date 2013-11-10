@@ -6,7 +6,6 @@ public abstract class Mobile extends Element
 
 	private double vx, vy;
 	private final double GRAVITY = 0.3;
-	private double lastCollided;
 	protected boolean grounded;
 	protected final double MAXVX = 5;
 	protected final double MOVESPEED = 0.2;
@@ -80,37 +79,60 @@ public abstract class Mobile extends Element
 			setVX(getVX() - dir * 0.2);
 		}
 		
-		setX( getX() + (int)getVX() );
-		setY( getY() + (int)getVY() );
+		
 		
 		
 		
 		for(int j = 0; j < elements.size(); j++){
-			while ((this.isColliding(elements.get(j)) != 0) && (elements.get(j) != this)){
-				setX(getX() - (getVX() > 0 ? -1 : 1));
-				//setY(getY() - (getVY() > 0 ? -1 : 1));
-				//setVY(0);
+			if ((elements.get(j) != this)){
+				switch (this.isColliding(elements.get(j))) {
+					
+					case 0: 
+						System.out.println("S'all good");
+						break;
+					
+					case 2:
+						setY(getY() - (getVY() > 0 ? -1 : 1));
+						setVY(0);
+						break;
+					case 1:
+						setX(getX() + (getVX()) > 0 ? -1 : 1);
+						setVX(-getVX()*0.5);
+						break;
+					case 3:
+						setX(getX() + (getVX()) > 0 ? -1 : 1);
+						setVX(-getVX()*0.5);
+						break;
+					case 4:
+						grounded = true;
+						setY(getY() - (getVY() > 0 ? -1 : 1));
+						setVY(0);
+						break;
+				
+				}
 				
 				
-				grounded = true;
 			}
 		}
 		
 		setY( getY() + 1 );
 		
-		for(int j = 0; j < elements.size(); j++){
-			if (this.isColliding(elements.get(j)) != 0 && elements.get(j) != this){
+		/*for(int j = 0; j < elements.size(); j++){
+			if (elements.get(j) != this && this.isColliding(elements.get(j)) != 0){
 				
 				grounded = true;
 			}else{
 				grounded = false;
 			}
-		}
+		}*/
 		
 		setY( getY() - 1 );
 		
 		if(getVY() < 10 && !grounded ){
 			setVY( getVY() + GRAVITY );
 		}
+		
+		setX( getX() + (int)getVX() );
+		setY( getY() + (int)getVY() );
 	}
 }

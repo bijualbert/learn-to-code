@@ -28,19 +28,28 @@ public abstract class Element{
 	    
 	    int count = 0;
 	    
-	    if(eLeftSide < rightSide)
-	    	count++;
+	    if(eTop < bottom && eLeftSide < rightSide && eRightSide > leftSide && eBottom > top){
+	    	System.out.println("bottom");
+	    	return 4;
+	    }
 	    
-	    if(eRightSide > leftSide)
-	    	count++;
+	    if(eBottom > top && eLeftSide < rightSide && eRightSide > leftSide && eTop < bottom){
+	    	System.out.println("top");
+	    	return 2;
+	    }
 	    
-	    if(eTop < bottom)
-	    	count++;
+	    if(eBottom > top && eTop < bottom && eRightSide < leftSide && eLeftSide > rightSide){
+	    	System.out.println("left");
+	    	return 3;
+	    }
 	    
-	    if(eBottom > top)
-	    	count++;	
+	    if(eBottom > top && eTop < bottom && eLeftSide < rightSide && eRightSide > leftSide ){
+	    	System.out.println("right");
+	    	return 1;
+	    }
+	    	
 	    
-	    return count >= 4 ? 1 : 0;
+	    return 0;
 	}
 
 	public void setX(double x) {
