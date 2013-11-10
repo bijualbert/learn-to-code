@@ -41,6 +41,7 @@ public abstract class Mobile extends Element
 	
 	public void moveRight(boolean val){
 		movingRight = val;
+
 	}
 	
 	public void moveRight()
