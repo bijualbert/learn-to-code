@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class Talker extends Character
 {
+	boolean displaying;
+	String str;
+	
 	public Talker( int x, int y, int health, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
@@ -12,9 +15,23 @@ public class Talker extends Character
 	public void update(){
 		super.update();
 		double dist = distanceTo(player);
-		System.out.println(dist);
+		if(dist < 100){
+			displayPrompt("testing testing");
+		}else{
+			hidePrompt();
+		}
 		
 	}
+	
+	public void displayPrompt(String str){
+		this.str = str;
+		displaying = true;
+	}
+	
+	public void hidePrompt(){
+		displaying = false;
+	}
+	
 	
 	public void action(  )
 	{
@@ -24,5 +41,13 @@ public class Talker extends Character
 	public void draw(Graphics g){
 		g.setColor(new Color(139, 69, 19));
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
+		
+		if(displaying){
+			g.setColor(Color.GRAY);
+			g.fillRect(getX() - 50, getY() - 50, 100, 30);
+		
+			g.setColor(Color.black);
+			g.drawString(str, getX() - 45, getY() - 30);
+		}
 	}
 }
