@@ -14,11 +14,11 @@ public class ClassReLoader extends ClassLoader {
 	}
 
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
-		if (!"reflection.PlayerCode".equals(name))
+		if (!"PlayerCodeImpl".equals(name))
 			return super.loadClass(name);
 
 		try {
-			String url = "file:PlayerCode.class";
+			String url = "file:bin/PlayerCodeImpl.class";
 			URL myUrl = new URL(url);
 			URLConnection connection = myUrl.openConnection();
 			InputStream input = connection.getInputStream();
@@ -34,7 +34,7 @@ public class ClassReLoader extends ClassLoader {
 
 			byte[] classData = buffer.toByteArray();
 
-			return defineClass("reflection.PlayerCode", classData, 0,
+			return defineClass("PlayerCodeImpl", classData, 0,
 					classData.length);
 
 		} catch (MalformedURLException e) {
