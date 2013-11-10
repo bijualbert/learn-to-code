@@ -32,7 +32,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		elements.add(player);
 		
 		elements.add(new Obstacle(0, 300, 500, 30, elements));
-		System.out.println("test");
+
+		
 		setFocusable(true);
 		addKeyListener(this);
 		
@@ -63,19 +64,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	
     	for(int i = 0; i < elements.size(); i++){
     		elements.get(i).update();
-    		/*for(int j = 0; j < elements.size(); j++){
-    			
-    			if (elements.get(i).isColliding(elements.get(j)) && elements.get(i) instanceof Mobile && i != j){
-    				Mobile temp = (Mobile) elements.get(i);
-    				temp.setX(temp.getX() - temp.getVX());
-    				temp.setY(temp.getY() - temp.getVY());
-    				temp.setVY(-0.5*temp.getVY());
-    			}
-    		}*/
     	}
 		
-		//while(iterator.hasNext())
-		//	((Element) iterator.next()).update();
     }
     
 	public void paint(Graphics g){
@@ -88,7 +78,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			((Element) iterator.next()).draw(g);
 		
 		g.setColor(Color.red);
-		g.drawString("test", 100, 100);
+		g.drawString(""+player.movingLeft, 100, 100);
+
+		g.drawString(""+player.movingRight, 100, 110);
+		g.drawString(""+player.getX(), 100, 120);
+		g.drawString(""+player.getY(), 100, 130);
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -102,6 +96,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	    if (key == KeyEvent.VK_RIGHT) {
 	        player.moveRight(true);
+	    }
+	    
+	    if (key == KeyEvent.VK_SPACE) {
+	        player.jump();
 	    }
 	}
 	

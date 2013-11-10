@@ -15,7 +15,7 @@ public abstract class Element{
 		this.elements = elements;
 	}
 	
-	public boolean isColliding(Element e){
+	public int isColliding(Element e){
 	    int leftSide = getX();
 	    int rightSide = getX() + getWidth();
 	    int top = getY();
@@ -26,14 +26,21 @@ public abstract class Element{
 	    int eTop = e.getY();
 	    int eBottom = e.getY() + e.getHeight();
 	    
-
-	    if(eLeftSide < rightSide)
-	        if(eRightSide > leftSide)
-	        	if(eTop < bottom)
-	        		if(eBottom > top)
-	        			return true;
+	    int count = 0;
 	    
-	    return false;
+	    if(eLeftSide < rightSide)
+	    	count++;
+	    
+	    if(eRightSide > leftSide)
+	    	count++;
+	    
+	    if(eTop < bottom)
+	    	count++;
+	    
+	    if(eBottom > top)
+	    	count++;	
+	    
+	    return count >= 4 ? 1 : 0;
 	}
 
 	public void setX(double x) {

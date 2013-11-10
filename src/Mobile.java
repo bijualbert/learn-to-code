@@ -5,13 +5,14 @@ public abstract class Mobile extends Element
 {
 
 	private double vx, vy;
-	private final double GRAVITY = 0.1;
+	private final double GRAVITY = 0.3;
 	private double lastCollided;
 	protected boolean grounded;
 	protected final double MAXVX = 5;
 	protected final double MOVESPEED = 0.2;
-	protected boolean movingRight;
-	protected boolean movingLeft;
+	protected final double JUMPSPEED = 5;
+	public boolean movingRight;
+	public boolean movingLeft;
 	
 	public Mobile( int x, int y, int width, int height, ArrayList<Element> elements )
 	{
@@ -34,14 +35,14 @@ public abstract class Mobile extends Element
 		this.vy = vy;
 	}
 	
-<<<<<<< HEAD
 	public void moveLeft(boolean val){
 		movingLeft = val;
 	}
 	
 	public void moveRight(boolean val){
 		movingRight = val;
-=======
+	}
+	
 	public void moveRight()
 	{
 		setX( getX() + getVX() );
@@ -50,7 +51,13 @@ public abstract class Mobile extends Element
 	public void moveLeft()
 	{
 		setX( getX() - getVX() );
->>>>>>> afd7062cff46659b97ad1ec62b002da173cb34b9
+	}
+	
+	public void jump(){
+		if(grounded)
+			setVY(getVY() - JUMPSPEED);
+		
+		grounded = false;
 	}
 	
 	public void update(){
@@ -59,20 +66,17 @@ public abstract class Mobile extends Element
 			if(getVX() > -MAXVX){
 				setVX(getVX() - MOVESPEED);
 			}
-		}else{
-			if(Math.abs(getVX()) < 0.1){
-				setVX(getVX() + MOVESPEED);
-			}
 		}
 		
 		if(movingRight){
 			if(getVX() < MAXVX){
 				setVX(getVX() + MOVESPEED);
 			}
-		}else{
-			if(Math.abs(getVX()) < 0.1){
-				setVX(getVX() - MOVESPEED);
-			}
+		}
+		
+		if(!movingLeft && !movingRight){
+			int dir = getVX() > 0 ? 1 : -1;
+			setVX(getVX() - dir * 0.2);
 		}
 		
 		setX( getX() + (int)getVX() );
@@ -81,18 +85,28 @@ public abstract class Mobile extends Element
 		
 		
 		for(int j = 0; j < elements.size(); j++){
-			if (this.isColliding(elements.get(j)) && elements.get(j) != this){
-				setX(getX() - getVX());
-				setY(getY() - getVY());
-				setVY(0);
+			while ((this.isColliding(elements.get(j)) != 0) && (elements.get(j) != this)){
+				setX(getX() - (getVX() > 0 ? -1 : 1));
+				//setY(getY() - (getVY() > 0 ? -1 : 1));
+				//setVY(0);
 				
-				if(System.currentTimeMillis() - lastCollided < 50){
-					setVY(0);
-				}
 				
 				grounded = true;
 			}
 		}
+		
+		setY( getY() + 1 );
+		
+		for(int j = 0; j < elements.size(); j++){
+			if (this.isColliding(elements.get(j)) != 0 && elements.get(j) != this){
+				
+				grounded = true;
+			}else{
+				grounded = false;
+			}
+		}
+		
+		setY( getY() - 1 );
 		
 		if(getVY() < 10 && !grounded ){
 			setVY( getVY() + GRAVITY );
