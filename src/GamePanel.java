@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import javax.swing.*;
@@ -39,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         new Thread(){public void run(){
         	try {
 				ltc.compileLoop();
-			} catch (ClassNotFoundException | InterruptedException e) {
+			} catch (ClassNotFoundException | InterruptedException | InvocationTargetException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
