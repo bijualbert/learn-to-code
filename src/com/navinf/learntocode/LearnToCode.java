@@ -1,6 +1,8 @@
 package com.navinf.learntocode;
 
 import java.awt.EventQueue;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +21,7 @@ import com.navinf.learntocode.PlayerCode;
 public class LearnToCode {
 	private static volatile LearnToCode instance;
 
-	private JFrame frame;
+	public JFrame frame;
 	private RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
 
 	/**
@@ -52,7 +54,12 @@ public class LearnToCode {
 				add(new JavaSourceFromString("PlayerCodeImpl",code));
 			}};
 			List<String> compileOptions = Arrays.asList(new String[]{"-d", "bin"}) ;
-			CompilationTask task = jc.getTask(null, null, null, compileOptions, null, java_files);
+			CompilationTask task;
+			try {
+				task = jc.getTask(new PrintWriter("errors.log"), null, null, compileOptions, null, java_files);
+			} catch (FileNotFoundException e1) {
+				throw new AssertionError(e1);
+			}
 			if(!task.call()){
 				System.err.println("[compile failed]");
 				continue;
