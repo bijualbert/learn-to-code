@@ -85,9 +85,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
 		
-		elements.add(new Obstacle(400, 150, 50, 150, elements));
+		
 		
 		elements.add(new Obstacle(1500, 150, 50, 150, elements));
+		
+		Obstacle door1 = new Obstacle(400, 150, 50, 150, elements);
+		
+		elements.add(door1);
 		
 		Shooter shooter = new Shooter(700, 200, 50, elements);
 		shooter.minX = 500;
@@ -138,7 +142,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		Graphics2D g = (Graphics2D)f;
 		g.setColor(Color.WHITE);
 		
+		
+		
 		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		
 		
 		g.translate(-player.getX() + getWidth()/2 -200, 0);
 		
@@ -160,7 +168,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.drawString(""+player.getY(), 100, 130);
 		
 		player.draw(g);
-		g.translate(-player.getX(), 0);
+		g.translate(player.getX() - getWidth()/2 + 200, 0);
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(30, 30, 100, 15);
+		
+		g.setColor(Color.RED);
+		g.fillRect(30, 30, player.getHealth(), 15);
+		
 		
 		
 		

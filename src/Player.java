@@ -18,6 +18,7 @@ public class Player extends Character
 		
 	}
 	
+	
 	public void draw(Graphics g){
 		g.setColor(Color.GREEN);
 		g.fillRect(getX(), getY(), getWidth(), getHeight());

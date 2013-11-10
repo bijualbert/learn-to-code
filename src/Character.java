@@ -31,6 +31,12 @@ public abstract class Character extends Mobile
 		return health;
 	}
 	
+	public void damage(int damage){
+		if(damage >= 0){
+			setHealth(getHealth() - damage);
+		}
+	}
+	
 	public abstract void draw(Graphics g);
 
 }
