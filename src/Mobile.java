@@ -28,6 +28,16 @@ public abstract class Mobile extends Element
 		this.vy = vy;
 	}
 	
+	public void moveRight()
+	{
+		
+	}
+	
+	public void moveLeft()
+	{
+		
+	}
+	
 	public void update(){
 		setX( getX() + (int)getVX() );
 		setY( getY() + (int)getVY() );
