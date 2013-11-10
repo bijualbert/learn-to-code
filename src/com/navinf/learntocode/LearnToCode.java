@@ -29,8 +29,7 @@ public class LearnToCode {
 	 * @throws InterruptedException 
 	 * @throws ClassNotFoundException 
 	 */
-	@SuppressWarnings("serial")
-	public static void main(String[] args) throws InterruptedException, ClassNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, InterruptedException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -42,14 +41,20 @@ public class LearnToCode {
 				}
 			}
 		});
-		
-		JavaCompiler jc = ToolProvider.getSystemJavaCompiler();
-		
 		while(LearnToCode.instance==null);
+		LearnToCode.instance.textArea.setText("public void main(){\n"+
+											  "\t\n"+
+											  "}");
+		compileLoop();
+	}
+	
+	public static void compileLoop() throws InterruptedException, ClassNotFoundException{
+		JavaCompiler jc = ToolProvider.getSystemJavaCompiler();
 		while(true){
 			final String code = "public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
 								LearnToCode.instance.textArea.getText()+
 								"}";
+			@SuppressWarnings("serial")
 			ArrayList<SimpleJavaFileObject> java_files = new ArrayList<SimpleJavaFileObject>(){{
 				add(new JavaSourceFromString("PlayerCodeImpl",code));
 			}};
