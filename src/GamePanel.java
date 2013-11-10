@@ -24,10 +24,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	public Player player;
 	
+	public static Component codeBox;
+	public static JFrame parentWindow;
+	
 	public static void main(String[] args) throws IOException
     {
     	
-		JFrame parentWindow = new JFrame("Learn Programming v1");
+		parentWindow = new JFrame("Learn Programming v1");
     	
     	me = new GamePanel();
     	me.addMouseListener(new MouseAdapter() {
@@ -42,10 +45,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	parentWindow.setSize(800 , 600);
         parentWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        me.setPreferredSize(new Dimension(800, 450));
+        
         final LearnToCode ltc = new LearnToCode();
-        Component codeBox = ltc.frame.getComponent(0);
+        codeBox = ltc.frame.getComponent(0);
         codeBox.setPreferredSize(new Dimension(800, 150));
         parentWindow.add(codeBox,BorderLayout.SOUTH);
+        codeBox.setVisible(false);
         new Thread(){public void run(){
         	try {
 				ltc.compileLoop();
@@ -100,7 +106,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(shooter);
 		
-		elements.add(new Talker(200, 150, 50, elements));
+		Talker talker = new Talker(200, 150, 50, elements);
+		
+		elements.add(talker);
 
 		
 		setFocusable(true);
@@ -196,6 +204,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    if (key == KeyEvent.VK_UP) {
 	        player.jump();
 	    }
+	    
+	    if (key == KeyEvent.VK_SPACE) {
+	    	Talker talker = new Talker(0, 0, 0, elements);
+	    	for(Element el: elements){
+	    		if(el instanceof Talker){
+	    			talker = (Talker)el;
+	    		}
+	    	}
+	    	if(player.distanceTo(talker) < 100){
+	    		codeBox.setVisible(true);
+	    		parentWindow.pack();
+	    		parentWindow.setSize(800 , 600);
+	    		codeBox.requestFocusInWindow();
+	    	}
+	    	
+	    }
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -209,6 +233,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    if (key == KeyEvent.VK_RIGHT) {
 	        player.moveRight(false);
 	    }
+	    
+	    
 	}
 	
 	public void keyTyped(KeyEvent e) {
