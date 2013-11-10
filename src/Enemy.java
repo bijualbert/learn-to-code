@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import java.util.*;
 
-public class Enemy extends Character
+public abstract class Enemy extends Character
 {
 	public enum Facing { LEFT, RIGHT }
 	Facing face = Facing.LEFT;
@@ -60,14 +60,14 @@ public class Enemy extends Character
 		case LEFT:
 		{	
 			if( player.getX() < getX() && getX() - player.getX() <= 200 )
-				shoot();
+				action();
 		}
 			break;
 		 		
 		case RIGHT:
 		{
 		 	if( player.getX() > getX() && player.getX() - getX() <= 200 )
-				shoot();
+				action();
 		}
 			break;
 				
@@ -76,7 +76,5 @@ public class Enemy extends Character
 		}
 	}
 
-	private void shoot()
-	{}
-	
+	public abstract void action();
 }
