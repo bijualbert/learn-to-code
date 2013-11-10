@@ -57,6 +57,7 @@ public class LearnToCode {
 		}});
 		String last_code = null;
 		boolean compiled = false;
+		boolean ran = false;
 		while(true){
 			final String code = "import java.util.*;\n"+
 								"public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
@@ -84,18 +85,27 @@ public class LearnToCode {
 				} else{
 					System.out.println("[compile succeeded]");
 					compiled=true;
+					ran=false;
 				}
 			}
-			if (compiled)
-				try {
-					PlayerCode playerCode = (PlayerCode) new ClassReLoader(
-							ClassReLoader.class.getClassLoader()).loadClass(
-							"PlayerCodeImpl").newInstance();
-					playerCode.main();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if (compiled&&!ran){
+				Thread playerCodeExecutor = new Thread(){public void run(){
+					try {
+						PlayerCode playerCode = (PlayerCode) new ClassReLoader(
+								ClassReLoader.class.getClassLoader()).loadClass(
+										"PlayerCodeImpl").newInstance();
+						playerCode.main();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}};
+				playerCodeExecutor.start();
+				playerCodeExecutor.join(3000);
+				if(playerCodeExecutor.isAlive())
+					playerCodeExecutor.stop();//XXX
+				ran=true;
+			}
 			Thread.sleep(500);
 		}
 	}
