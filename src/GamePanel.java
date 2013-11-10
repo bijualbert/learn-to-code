@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(shooter);
 		
-		Talker talker = new Talker(200, 150, 50, elements);
+		Talker talker = new Talker(200, 150, 50, "I am a computer with a 4 digit passcode.", elements);
 		
 		elements.add(talker);
 
@@ -206,7 +206,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    }
 	    
 	    if (key == KeyEvent.VK_SPACE) {
-	    	Talker talker = new Talker(0, 0, 0, elements);
+	    	Talker talker = new Talker(0, 0, 0, "I am a computer with a 4 digit passcode.", elements);
 	    	for(Element el: elements){
 	    		if(el instanceof Talker){
 	    			talker = (Talker)el;

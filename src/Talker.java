@@ -7,16 +7,17 @@ public class Talker extends Character
 	boolean displaying;
 	String str;
 	
-	public Talker( int x, int y, int health, ArrayList<Element> elements )
+	public Talker( int x, int y, int health, String str, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
+		this.str = str;
 	}
 	
 	public void update(){
 		super.update();
 		double dist = distanceTo(player);
 		if(dist < 100){
-			displayPrompt("testing testing");
+			displayPrompt(str);
 		}else{
 			hidePrompt();
 		}
@@ -44,7 +45,7 @@ public class Talker extends Character
 		
 		if(displaying){
 			g.setColor(Color.GRAY);
-			g.fillRect(getX() - 50, getY() - 50, 100, 30);
+			g.fillRect(getX() - 50, getY() - 50, g.getFontMetrics().stringWidth(str) + 5, 30);
 		
 			g.setColor(Color.black);
 			g.drawString(str, getX() - 45, getY() - 30);
