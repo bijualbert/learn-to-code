@@ -72,7 +72,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage background;
 	private BufferedImage trophy;
 	private BufferedImage comp;
-	private BufferedImage player_image;
 	AffineTransformOp reflect;
     
 	//private Ball e1;
@@ -81,7 +80,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		background=ImageIO.read(new File("background.jpg"));
 		trophy=ImageIO.read(new File("trophy.png"));
 		comp=ImageIO.read(new File("comp.jpg"));
-		player_image=ImageIO.read(new File("player.png"));
 //		AffineTransform scale = new AffineTransform();
 //		scale.scale(0.4, 0.4);
 //		//scale.

@@ -1,7 +1,12 @@
 package com.navinf.learntocode;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Talker extends Character
 {
@@ -13,10 +18,17 @@ public class Talker extends Character
 	int code  = 1337;
 	
 	Obstacle attached;
+	private BufferedImage image;
 	
 	public Talker( int x, int y, int health, String str, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
+		try {
+			image=ImageIO.read(new File("comp.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.str = str;
 	}
 	
@@ -66,7 +78,8 @@ public class Talker extends Character
 	
 	public void draw(Graphics g){
 		g.setColor(new Color(139, 69, 19));
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
+		//g.fillRect(getX(), getY(), getWidth(), getHeight());
+		g.drawImage(image,getX(), getY(), getWidth(), getHeight(), null);
 		
 		if(displaying){
 			g.setColor(Color.GRAY);

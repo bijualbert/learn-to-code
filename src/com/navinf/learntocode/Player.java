@@ -1,17 +1,24 @@
 package com.navinf.learntocode;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 
 public class Player extends Character
 {
+	private BufferedImage player_image;
 	boolean dead;
-	public Player( int x, int y, int health, ArrayList<Element> elements )
+	public Player( int x, int y, int health, ArrayList<Element> elements ) throws IOException
 	{
 		super( x, y, health, elements );
 		MOVESPEED = 0.2;
 
+		player_image=ImageIO.read(new File("player.png"));
 	}
 	
 	public void update(){
@@ -31,7 +38,8 @@ public class Player extends Character
 	
 	public void draw(Graphics g){
 		g.setColor(dead ? Color.RED : Color.GREEN);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
+		g.drawImage(player_image, getX(), getY(), getWidth(), getHeight(), null);
+		//g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 }
