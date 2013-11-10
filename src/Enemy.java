@@ -32,9 +32,9 @@ public class Enemy extends Character
 		{
 		case 1:
 			if( face == Facing.LEFT )
-				moveLeft();
+				moveLeft( true );
 			else
-				moveRight();
+				moveRight( true );
 			break;
 			
 		case 2:

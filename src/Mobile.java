@@ -34,23 +34,12 @@ public abstract class Mobile extends Element
 		this.vy = vy;
 	}
 	
-<<<<<<< HEAD
 	public void moveLeft(boolean val){
 		movingLeft = val;
 	}
 	
 	public void moveRight(boolean val){
 		movingRight = val;
-=======
-	public void moveRight()
-	{
-		setX( getX() + getVX() );
-	}
-	
-	public void moveLeft()
-	{
-		setX( getX() - getVX() );
->>>>>>> afd7062cff46659b97ad1ec62b002da173cb34b9
 	}
 	
 	public void update(){
