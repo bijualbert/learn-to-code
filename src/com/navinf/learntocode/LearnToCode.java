@@ -94,7 +94,7 @@ public class LearnToCode {
 					compiled=true;
 					ran=false;
 				}
-				status.setText(GamePanel.el.last+"\t"+GamePanel.pl.last);
+				status.setText(GamePanel.el.last);
 			}
 			if (compiled&&!ran){
 				Thread playerCodeExecutor = new Thread(){public void run(){
@@ -112,6 +112,7 @@ public class LearnToCode {
 				playerCodeExecutor.join(3000);
 				if(playerCodeExecutor.isAlive())
 					playerCodeExecutor.stop();//XXX
+				status.setText(GamePanel.el.last+":\t "+ (GamePanel.pl.last!=null?GamePanel.pl.last:""));
 				ran=true;
 			}
 			Thread.sleep(500);
