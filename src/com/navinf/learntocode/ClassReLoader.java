@@ -18,8 +18,7 @@ public class ClassReLoader extends ClassLoader {
 			return super.loadClass(name);
 
 		try {
-			String url = "file:C:/data/projects/tutorials/web/WEB-INF/"
-					+ "classes/reflection/MyObject.class";
+			String url = "file:PlayerCode.class";
 			URL myUrl = new URL(url);
 			URLConnection connection = myUrl.openConnection();
 			InputStream input = connection.getInputStream();
@@ -35,7 +34,7 @@ public class ClassReLoader extends ClassLoader {
 
 			byte[] classData = buffer.toByteArray();
 
-			return defineClass("reflection.MyObject", classData, 0,
+			return defineClass("reflection.PlayerCode", classData, 0,
 					classData.length);
 
 		} catch (MalformedURLException e) {
