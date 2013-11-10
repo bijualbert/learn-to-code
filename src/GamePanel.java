@@ -24,12 +24,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	public Player player;
 	
+	public static PrintLogger pl;
 	public static Component codeBox;
 	public static JFrame parentWindow;
 	
 	public static void main(String[] args) throws IOException
     {
-    	
+    	System.setOut(pl=new PrintLogger(System.out));
 		parentWindow = new JFrame("Learn Programming v1");
     	
     	me = new GamePanel();
