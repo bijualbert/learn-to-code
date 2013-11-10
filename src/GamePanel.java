@@ -67,9 +67,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public GamePanel() throws IOException {
 		background=ImageIO.read(new File("background.jpg"));
-		AffineTransform scale = new AffineTransform();
-		scale.scale(0.4, 0.4);
-		//scale.
+//		AffineTransform scale = new AffineTransform();
+//		scale.scale(0.4, 0.4);
+//		//scale.
 		
 		AffineTransform tr = AffineTransform.getScaleInstance(-1, 1);
 		tr.translate(-background.getWidth(null), 0);
