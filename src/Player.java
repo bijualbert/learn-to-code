@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 
 public class Player extends Character
 {
 	
-	public Player( int x, int y, int health )
+	public Player( int x, int y, int health, ArrayList<Element> elements )
 	{
-		super( x, y, health );
+		super( x, y, health, elements );
 
 	}
 	

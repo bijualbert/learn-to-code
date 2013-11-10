@@ -1,21 +1,16 @@
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public abstract class Character extends Mobile
 {
 	private int health;
 	
-	public Character()
-	{
-
-		super(0,0,1,1);
-		setHealth( 100 );
-	}
 	
-	public Character( int x, int y, int health )
+	public Character( int x, int y, int health, ArrayList<Element> elements )
 	{
-		super(x,y,32,32);
+		super(x,y,32,32, elements);
 		setHealth(health);
 	}
 	

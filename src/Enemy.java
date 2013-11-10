@@ -1,19 +1,20 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Enemy extends Character
 {
 	public enum Facing { LEFT, RIGHT }
 	Facing face = Facing.LEFT;
 	
-	public Enemy( int x, int y, int health )
+	public Enemy( int x, int y, int health, ArrayList<Element> elements )
 	{
-		super( x, y, health );
+		super( x, y, health, elements );
 	}
 	
 	public void movement(Player player)
 	{
 	
-		while()
+		/*while()
 		{
 			switch( face )
 			{
@@ -35,7 +36,7 @@ public class Enemy extends Character
 			default:
 				break;
 			}
-		}
+		}*/
 	}
 
 	public void shoot()
@@ -48,4 +49,6 @@ public class Enemy extends Character
 	public void update(){
 		
 	}
+	
+	public void movement(){}
 }

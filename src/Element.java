@@ -1,13 +1,18 @@
-import java.awt.Graphics;
+import java.awt.*;
+import java.util.*;
 
 public abstract class Element{
 	private int x, y, width, height;
 	
-	public Element(int x, int y, int width, int height){
+	protected ArrayList<Element> elements;
+	
+	public Element(int x, int y, int width, int height, ArrayList<Element> elements){
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		this.elements = elements;
 	}
 	
 	public boolean isColliding(Element e){
