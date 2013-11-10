@@ -125,8 +125,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		computer = talker2;
 		
+		elements.add(new Obstacle(2000, 0, 50, 300, elements));
+		elements.add(new Obstacle(2050, 0, 400, 50, elements));
+		elements.add(new Obstacle(2450, 0, 50, 300, elements));
+		
 		//Dummy talkers
-		elements.add(new Talker(1350, 150, 50, "Talk to voice-activated computers using \"System.out.println.\"", elements));
+		//elements.add(new Talker(1350, 150, 50, "Talk to voice-activated computers using \"System.out.println.\"", elements));
 
 		setFocusable(true);
 		addKeyListener(this);
@@ -245,7 +249,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    		codeBox.setVisible(true);
 	    		parentWindow.pack();
 	    		parentWindow.setSize(800 , 600);
-	    		codeBox.requestFocusInWindow();
+	    		//codeBox.requestFocusInWindow();
 	    		elements.add(new Talker(-50, 150, 50, "Fill in the quotes: System.out.println(\" \");", elements));
 
 	    	}
