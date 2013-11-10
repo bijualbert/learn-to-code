@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		elements.add(shooter);
 		
-		Talker talker = new Talker(200, 150, 50, "I am a computer with a 4 digit passcode.", elements);
+		Talker talker = new Talker(200, 150, 50, "I am a voice-activated computer -- Identify yourself.", elements);
 		
 		elements.add(talker);
 
@@ -207,13 +207,27 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    }
 	    
 	    if (key == KeyEvent.VK_SPACE) {
-	    	Talker talker = new Talker(0, 0, 0, "I am a computer with a 4 digit passcode.", elements);
+	    	Talker talker1 = new Talker(0, 0, 0, "I am a voice-activated computer -- Identify yourself.", elements);
 	    	for(Element el: elements){
-	    		if(el instanceof Talker){
-	    			talker = (Talker)el;
+	    		if(el instanceof Talker && ((Talker)el).str == "I am a voice-activated computer -- Identify yourself."){
+	    			talker1 = (Talker)el;
 	    		}
 	    	}
-	    	if(player.distanceTo(talker) < 100){
+	    	if(player.distanceTo(talker1) < 100){
+	    		codeBox.setVisible(true);
+	    		parentWindow.pack();
+	    		parentWindow.setSize(800 , 600);
+	    		codeBox.requestFocusInWindow();
+	    	}
+	    	
+	    	
+	    	Talker talker2 = new Talker(0, 0, 0, "I am a computer with a 4 digit passcode.", elements);
+	    	for(Element el: elements){
+	    		if(el instanceof Talker && ((Talker)el).str == "I am a computer with a 4 digit passcode."){
+	    			talker1 = (Talker)el;
+	    		}
+	    	}
+	    	if(player.distanceTo(talker1) < 100){
 	    		codeBox.setVisible(true);
 	    		parentWindow.pack();
 	    		parentWindow.setSize(800 , 600);
