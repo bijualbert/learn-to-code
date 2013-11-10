@@ -84,7 +84,7 @@ public class LearnToCode {
 					System.err.println("[compile failed]");
 					compiled=false;
 				} else{
-					System.out.println("[compile succeeded]");
+					System.err.println("[compile succeeded]");
 					compiled=true;
 					ran=false;
 				}

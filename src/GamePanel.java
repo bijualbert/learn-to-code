@@ -143,6 +143,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	for(int i = 0; i < elements.size(); i++){
     		elements.get(i).update();
     	}
+    	int index = 0;
+    	for(int i = 0; i < elements.size(); i++){
+    		if(elements.get(i) instanceof Obstacle && ((Obstacle)elements.get(i)).getX() == 400){
+    			index = i;
+    		}
+    	}
+    	if(pl.last != null && index > 0){
+    		System.out.println("deletin shit");
+    		elements.remove(index);
+    	}
 		
     }
     
