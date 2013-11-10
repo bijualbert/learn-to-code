@@ -61,6 +61,7 @@ public class LearnToCode {
 		while(true){
 			final String code = "import java.util.*;\n"+
 								"public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
+								"public Mobile player = (Mobile)GamePanel.me.player;\n"+
 								textArea.getText()+
 								"}";
 			if(!code.equals(last_code)){
