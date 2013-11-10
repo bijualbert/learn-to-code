@@ -2,14 +2,19 @@ package com.navinf.learntocode;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.*;
 import javax.tools.JavaCompiler;
+import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
 
 import org.fife.ui.rtextarea.*;
 import org.fife.ui.rsyntaxtextarea.*;
+
+import com.navinf.learntocode.PlayerCode;
 
 public class LearnToCode {
 	private static volatile LearnToCode instance;
@@ -19,9 +24,11 @@ public class LearnToCode {
 
 	/**
 	 * Launch the application.
+	 * @throws InterruptedException 
+	 * @throws ClassNotFoundException 
 	 */
 	@SuppressWarnings("serial")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, ClassNotFoundException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,11 +45,19 @@ public class LearnToCode {
 		
 		while(LearnToCode.instance==null);
 		while(true){
-			final String code = LearnToCode.instance.textArea.getText();
+			final String code = "public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
+								LearnToCode.instance.textArea.getText()+
+								"}";
 			ArrayList<SimpleJavaFileObject> java_files = new ArrayList<SimpleJavaFileObject>(){{
-				add(new JavaSourceFromString("Main",code));
+				add(new JavaSourceFromString("PlayerCodeImpl",code));
 			}};
-			jc.getTask(null, null, null, null, null, java_files);
+			List<String> compileOptions = Arrays.asList(new String[]{"-d", "bin"}) ;
+			CompilationTask task = jc.getTask(null, null, null, compileOptions, null, java_files);
+			if(!task.call())
+				System.err.println("compile failed");
+			else
+				System.out.println("compile succeeded");
+			Thread.sleep(300);
 		}
 	}
 
