@@ -1,4 +1,3 @@
-
 public abstract class Character extends Element
 {
 	private int health, x, y;
