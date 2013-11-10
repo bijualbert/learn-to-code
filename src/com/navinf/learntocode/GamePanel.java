@@ -148,6 +148,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		//Dummy talkers
 		elements.add(new Talker(2055, 200, 50, "How can you get into the box using code?", elements));
 		elements.add(new Talker(1800, 150, 50, "My current coordinates are: 1800, 250", elements));
+		elements.add(new Talker( 1200, 150, 50, "You need to enter the passcode into \"computer.unlock(i)\"", elements));
+		elements.add(new Talker( 735, 150, 50, "Use a for loop: \"for(int i = 0; i < 10000; i++ )\"", elements));
 
 		setFocusable(true);
 		addKeyListener(this);
@@ -187,7 +189,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     		}
     	}
     	if(pl.last != null && index > 0){
-    		System.out.println("deletin shit");
     		elements.remove(index);
     	}
     	
