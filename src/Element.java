@@ -2,14 +2,12 @@ import java.awt.Graphics;
 
 public abstract class Element{
 	private int x, y, width, height;
-	private boolean mobile;
 	
-	public Element(int x, int y, int width, int height, boolean mobile){
+	public Element(int x, int y, int width, int height){
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.mobile = mobile;
 	}
 	
 	public boolean isColliding(Element e){

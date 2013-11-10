@@ -1,18 +1,24 @@
 
+import java.awt.*;
+
+
 public abstract class Character extends Mobile
 {
 	private int health;
 	
 	public Character()
 	{
-		super( 0, 0, 0, 0, false );
+
+		super(0,0,1,1);
 		setHealth( 100 );
 	}
-	public Character( int x, int y, int width, int height, int health, boolean moving )
+	
+	public Character( int x, int y, int health )
 	{
-		super( x, y, width, height, moving );
-		setHealth( health );
+		super(x,y,32,32);
+		setHealth(health);
 	}
+	
 	
 	public void setHealth( int a )
 	{
@@ -24,5 +30,13 @@ public abstract class Character extends Mobile
 		return health;
 	}
 
+	
+	
 	public abstract void movement();
+	
+	public void draw(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+
 }
