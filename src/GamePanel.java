@@ -11,13 +11,15 @@ import com.navinf.learntocode.LearnToCode;
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private static final int FPS = 1000 / 36;
 	private int ticks;
+	
 	public static GamePanel me;
 	
 	Player player;
 	
 	public static void main(String[] args)
     {
-    	JFrame parentWindow = new JFrame("Learn Programming v0");
+    	
+		JFrame parentWindow = new JFrame("Learn Programming v1");
     	
     	me = new GamePanel();
     	me.addMouseListener(new MouseAdapter() {
@@ -39,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         new Thread(){public void run(){
         	try {
 				ltc.compileLoop();
-			} catch (ClassNotFoundException | InterruptedException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -57,7 +59,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		player = new Player(20, 20, 100, elements);
 		elements.add(player);
 		
-		elements.add(new Obstacle(0, 300, 500, 30, elements));
+		
+		
+		elements.add(new Obstacle(0, 300, 5000, 30, elements));
 		
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
 		
@@ -91,7 +95,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 	
     public void update(){
-    	//Iterator iterator = elements.iterator();
     	
     	for(int i = 0; i < elements.size(); i++){
     		elements.get(i).update();
@@ -99,14 +102,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
     }
     
-	public void paint(Graphics g){
+	public void paint(Graphics f){
+		super.paint(f);
+		Graphics2D g = (Graphics2D)f;
 		g.setColor(Color.WHITE);
+		g.translate(player.getX(), 0);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
-		Iterator iterator = elements.iterator();
+		Iterator<? extends Element> iterator = elements.iterator();
 		
 		while(iterator.hasNext())
-			((Element) iterator.next()).draw(g);
+			iterator.next().draw(g);
 		
 		g.setColor(Color.red);
 		g.drawString(""+player.grounded, 100, 100);
@@ -114,6 +120,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.drawString(""+ticks, 100, 110);
 		g.drawString(""+player.getX(), 100, 120);
 		g.drawString(""+player.getY(), 100, 130);
+		g.translate(-player.getX(), 0);
+		
 	}
 	
 	public void keyPressed(KeyEvent e) {

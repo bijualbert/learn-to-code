@@ -88,7 +88,7 @@ public class LearnToCode {
 							ClassReLoader.class.getClassLoader()).loadClass(
 							"PlayerCodeImpl").newInstance();
 					playerCode.main();
-				} catch (InstantiationException | IllegalAccessException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
