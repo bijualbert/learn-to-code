@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public Player player;
 	
 	public static PrintLogger pl;
+	public static PrintLogger el;
 	public static Component codeBox;
 	public static JFrame parentWindow;
 	public static Talker computer;
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static void main(String[] args) throws IOException
     {
     	System.setOut(pl=new PrintLogger(System.out));
+    	System.setErr(el=new PrintLogger(System.err));
 		parentWindow = new JFrame("Learn Programming v1");
     	
     	me = new GamePanel();

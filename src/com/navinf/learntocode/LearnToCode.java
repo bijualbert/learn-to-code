@@ -94,6 +94,7 @@ public class LearnToCode {
 					compiled=true;
 					ran=false;
 				}
+				status.setText(GamePanel.el.last);
 			}
 			if (compiled&&!ran){
 				Thread playerCodeExecutor = new Thread(){public void run(){
