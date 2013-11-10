@@ -19,10 +19,11 @@ import org.fife.ui.rsyntaxtextarea.*;
 import com.navinf.learntocode.PlayerCode;
 
 public class LearnToCode {
+	@Deprecated
 	private static volatile LearnToCode instance;
 
 	public JFrame frame;
-	private RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+	public RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
 
 	/**
 	 * Launch the application.
@@ -42,17 +43,18 @@ public class LearnToCode {
 			}
 		});
 		while(LearnToCode.instance==null);
-		LearnToCode.instance.textArea.setText("public void main(){\n"+
-											  "\t\n"+
-											  "}");
-		compileLoop();
+		LearnToCode.instance.compileLoop();
 	}
 	
-	public static void compileLoop() throws InterruptedException, ClassNotFoundException{
+	public void compileLoop() throws InterruptedException, ClassNotFoundException{
 		JavaCompiler jc = ToolProvider.getSystemJavaCompiler();
+		textArea.setText("public void main(){\n"+
+				  "\t\n"+
+				  "}");
 		while(true){
-			final String code = "public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
-								LearnToCode.instance.textArea.getText()+
+			final String code = "import java.util.*;\n"+
+								"public class PlayerCodeImpl extends com.navinf.learntocode.PlayerCode{"+
+								textArea.getText()+
 								"}";
 			@SuppressWarnings("serial")
 			ArrayList<SimpleJavaFileObject> java_files = new ArrayList<SimpleJavaFileObject>(){{
@@ -78,7 +80,7 @@ public class LearnToCode {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Thread.sleep(200);
+			Thread.sleep(400);
 		}
 	}
 
