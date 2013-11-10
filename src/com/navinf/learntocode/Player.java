@@ -39,7 +39,8 @@ public class Player extends Character
 	public void draw(Graphics g){
 		g.setColor(dead ? Color.RED : Color.GREEN);
 		g.drawImage(player_image, getX(), getY(), getWidth(), getHeight(), null);
-		//g.fillRect(getX(), getY(), getWidth(), getHeight());
+		if(dead)
+			g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 }
