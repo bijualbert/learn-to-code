@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static PrintLogger pl;
 	public static Component codeBox;
 	public static JFrame parentWindow;
+	public static Talker computer;
 	
 	public static void main(String[] args) throws IOException
     {
@@ -94,9 +95,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		
-		elements.add(new Obstacle(1500, 150, 50, 150, elements));
+		//elements.add(new Obstacle(1500, 150, 50, 150, elements));
 		
-		Obstacle door1 = new Obstacle(400, 150, 50, 150, elements);
+		Obstacle door1 = new Obstacle(400, 100, 50, 200, elements);
 		
 		elements.add(door1);
 		
@@ -110,7 +111,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		Talker talker = new Talker(200, 150, 50, "I am a voice-activated computer -- Identify yourself.", elements);
 		
 		elements.add(talker);
-
+		
+		
+		Obstacle door2 = new Obstacle(1500, 100, 50, 200, elements);
+		
+		elements.add(door2);
+		
+		Talker talker2 = new Talker(1350, 150, 50, "I have a 4-digit passcode.", elements);
+		talker2.setAttached(door2);
+		
+		elements.add(talker2);
+		
+		computer = talker2;
+		
+		//Dummy talkers
+		elements.add(new Talker(1350, 150, 50, "You can talk to the ", elements));
 		
 		setFocusable(true);
 		addKeyListener(this);
@@ -153,6 +168,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     		System.out.println("deletin shit");
     		elements.remove(index);
     	}
+    	
+    	
 		
     }
     

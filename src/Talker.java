@@ -7,12 +7,26 @@ public class Talker extends Character
 	boolean displaying;
 	String str;
 	
+	boolean unlocked;
+	
 	int code  = 1337;
+	
+	int attached;
 	
 	public Talker( int x, int y, int health, String str, ArrayList<Element> elements )
 	{
 		super( x, y, health, elements );
 		this.str = str;
+	}
+	
+	public void setAttached(Obstacle o){
+		int index = 0;
+		for(int i = 0; i < elements.size(); i++){
+    		if(elements.get(i) instanceof Obstacle && ((Obstacle)elements.get(i)) == o){
+    			index = i;
+    		}
+    	}
+		attached = index;
 	}
 	
 	public void update(){
@@ -42,7 +56,11 @@ public class Talker extends Character
 	}
 	
 	public boolean unlock(int testCode){
-		return testCode == code;
+		if(testCode == code){
+			unlocked = true;
+			elements.remove(attached);
+		}
+		return unlocked;
 	}
 	
 	public void draw(Graphics g){
