@@ -12,6 +12,7 @@ public abstract class Mobile extends Element
 	protected final double JUMPSPEED = 10;
 	public boolean movingRight;
 	public boolean movingLeft;
+	protected int ticker;
 	
 	public Mobile( int x, int y, int width, int height, ArrayList<Element> elements )
 	{
@@ -62,6 +63,8 @@ public abstract class Mobile extends Element
 	
 	public void update(){
 		
+		ticker++;
+		
 		if(movingLeft){
 			if(getVX() > -MAXVX){
 				setVX(getVX() - MOVESPEED);
@@ -87,7 +90,7 @@ public abstract class Mobile extends Element
 		
 		for(int j = 0; j < elements.size(); j++){
 			
-			if ((elements.get(j) != this)){
+			if ((elements.get(j) != this) && !(elements.get(j) instanceof Mobile)){
 				
 				
 				

@@ -67,6 +67,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		elements.add(new Obstacle(200, 250, 50, 50, elements));
 		
 		elements.add(new Obstacle(400, 150, 50, 150, elements));
+		
+		elements.add(new Shooter(1000, 200, 50, elements));
 
 		
 		setFocusable(true);
@@ -139,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	        player.moveRight(true);
 	    }
 	    
-	    if (key == KeyEvent.VK_SPACE) {
+	    if (key == KeyEvent.VK_UP) {
 	        player.jump();
 	    }
 	}

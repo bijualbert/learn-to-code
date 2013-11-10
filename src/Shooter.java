@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.awt.*;
 
 public class Shooter extends Enemy
 {
@@ -10,6 +11,11 @@ public class Shooter extends Enemy
 	public void action(  )
 	{
 		
+	}
+	
+	public void draw(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 }
 

@@ -22,6 +22,13 @@ public abstract class Enemy extends Character
 		}
 	}
 	
+	public void update(){
+		super.update();
+		if(ticker % 60 == 0){
+			movement();
+		}
+	}
+	
 	public void movement()
 	{
 		int choice = random.nextInt( 3 ) + 1;
@@ -31,10 +38,12 @@ public abstract class Enemy extends Character
 		switch( choice )
 		{
 		case 1:
-			if( face == Facing.LEFT )
+			if( face == Facing.LEFT ){
 				moveLeft( true );
-			else
+				moveRight( false );
+			}else{
 				moveRight( true );
+				moveLeft( false );}
 			break;
 			
 		case 2:

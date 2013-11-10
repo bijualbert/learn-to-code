@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 
@@ -13,6 +15,11 @@ public class Player extends Character
 	public void movement()
 	{
 		
+	}
+	
+	public void draw(Graphics g){
+		g.setColor(Color.GREEN);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 }

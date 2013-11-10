@@ -24,14 +24,7 @@ public abstract class Character extends Mobile
 	{
 		return health;
 	}
-
 	
-	
-	public abstract void movement();
-	
-	public void draw(Graphics g){
-		g.setColor(Color.RED);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-	}
+	public abstract void draw(Graphics g);
 
 }
